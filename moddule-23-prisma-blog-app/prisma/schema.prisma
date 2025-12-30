@@ -13,40 +13,50 @@ datasource db {
   provider = "postgresql"
 }
 
+model Post {
+  id         String     @id @default(uuid())
+  title      String     @db.VarChar(225)
+  content    String     @db.Text
+  thumbnail  String?
+  isFeatured Boolean    @default(false)
+  status     PostStatus @default(PUBLISHED)
+  tags       String[]
+  views      Int        @default(0)
+  authorId   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  coments    Coment[]
 
-model Post{
-  id String @id @default(uuid())
-  title String @db.VarChar(225)
-  content String @db.Text
-  thumbnail String?
-  isFeatured Boolean @default(false)
-  status PostStatus @default(PUBLISHED)
-  tags String[]
-  views Int @default(0)
-  authorId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@index([authorId])
+  @@map("Posts")
 }
+
 model Coment {
-  id String @id @default(uuid())
-  content String @db.Text
-  authorId String 
-  parentId String?
-status CommentStatus @default(APROVED)
-    createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
- 
- }
+  id        String        @id @default(uuid())
+  content   String        @db.Text
+  authorId  String
+  postId    String
+  post      Post          @relation(fields: [postId], references: [id])
+  parentId  String?
+  parent Coment? @relation("CommentReplies",fields: [parentId],references: [id])
+  repies Coment [] @relation("CommentReplies")
+  status    CommentStatus @default(APROVED)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 
 
+@@index([postId])
+@@index([authorId])
+@@map("comments")
+}
 
-
-enum PostStatus{
+enum PostStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
 }
-enum CommentStatus{
+
+enum CommentStatus {
   APROVED
   REJECT
 }
