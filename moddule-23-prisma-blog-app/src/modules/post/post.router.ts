@@ -4,8 +4,7 @@ import { PostController } from "./post.controller";
 const router = express.Router();
 
 router.post(
-    '/',
-    PostController.craatePost
+    '/',PostController.createPost
 )
 
 

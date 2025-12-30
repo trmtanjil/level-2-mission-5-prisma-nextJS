@@ -1,11 +1,20 @@
 import { Request, Response } from "express";
+import { postService } from "./post.service";
 
 
- const craatePost = async (req:Request, res:Response)=>{
-       console.log({req,res})
+ const createPost = async (req:Request, res:Response)=>{
+      try{
+        const result = await postService.createPost(req.body)
+        res.status(201).json(result)
+      }catch(e){
+        res.status(400).json({
+            error:"Post creation faild",
+            details:e
+        })
+      }
  }
 
 
  export const PostController = {
-    craatePost
+    createPost
  }
