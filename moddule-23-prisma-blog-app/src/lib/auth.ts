@@ -47,6 +47,7 @@ export const auth = betterAuth({
   },
   emailVerification:{
     sendOnSignUp:true,
+    autoSignInAfterVerification:true,
     sendVerificationEmail:async({user,url,token},request)=>{
    try{
    const verificationUrl = `${process.env.APP_URL}/verify-email?token=${token}`
@@ -147,6 +148,8 @@ throw errr
 
   socialProviders: {
         google: { 
+          accessType:"offline",
+          prompt:"select_account consent",
             clientId: process.env.GOOGLE_CLIENT_ID as string, 
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
         }, 
