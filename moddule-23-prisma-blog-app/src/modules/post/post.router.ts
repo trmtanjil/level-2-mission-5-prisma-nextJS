@@ -1,10 +1,25 @@
-import  express, { Router }  from "express";
+import  express, { NextFunction, Request, Response, Router }  from "express";
 import { PostController } from "./post.controller";
+import {auth as betterAuth} from "../../lib/auth"
 
 const router = express.Router();
 
+const auth =(...roles:any)=>{
+return async (req:Request,res:Response,next:NextFunction)=>{
+    //get session
+    const session = await betterAuth.api.getSession({
+        headers:req.headers as any 
+    })
+    console.log(session)
+    next()
+}
+}
+
+
 router.post(
-    '/',PostController.createPost
+    '/',
+    auth("USER"),
+    PostController.createPost
 )
 
 
