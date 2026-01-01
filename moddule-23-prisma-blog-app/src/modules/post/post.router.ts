@@ -6,7 +6,10 @@ const router = express.Router();
 
 // type for role 
 
-
+router.get(
+    "/",
+    PostController.getAllPost
+)
 
 router.post(
     '/',

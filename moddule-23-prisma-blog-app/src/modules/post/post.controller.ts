@@ -22,7 +22,20 @@ import { postService } from "./post.service";
       }
  }
 
+const getAllPost=async(req:Request,res:Response)=>{
+try{
+const result =await postService.getAllPost()
+res.status(200).json(result)
+}catch(err){
+res.status(400).json({
+            error:"Post creation faild",
+            details:err
+        })
+}
+}
+
 
  export const PostController = {
-    createPost
+    createPost,
+    getAllPost
  }
