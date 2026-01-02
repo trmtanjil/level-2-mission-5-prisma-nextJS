@@ -2,10 +2,13 @@ import { Post } from "../../../generated/prisma/client";
 import { prisma } from "../../lib/prisma"
 
 
-const getAllPost=async(payload:{search:string |undefined})=>{
+const getAllPost=async(payload:{search:string |undefined,
+tags:string[]|[]
+})=>{
 const allPost =await prisma.post.findMany({
     where:{
-        OR:[
+   AND:[
+        { OR:[
            { title:{
             contains:payload.search as string,
             mode:"insensitive"
@@ -17,7 +20,11 @@ const allPost =await prisma.post.findMany({
         {tags:{
             has:payload.search as string,
         }}
-        ]
+        ]},
+      {  tags:{
+            hasEvery:payload.tags as string[]
+        }}
+   ]
     }
 });
  return allPost;
