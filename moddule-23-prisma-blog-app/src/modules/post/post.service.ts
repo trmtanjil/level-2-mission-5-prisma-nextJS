@@ -4,14 +4,17 @@ import { prisma } from "../../lib/prisma"
 
 
 const getAllPost=async({
-    search,tags}
+    search,tags,isFeatured}
     :{search:string |undefined,
-    tags:string[]|[]
+    tags:string[]|[],
+    isFeatured :boolean
 })=>{
 
     const andConditions:PostWhereInput[]=[]
 
-    if(search)  { OR:[
+    if(search) 
+        andConditions.push(
+     { OR:[
            { title:{
             contains:search  ,
             mode:"insensitive"
@@ -23,11 +26,22 @@ const getAllPost=async({
         {tags:{
             has:search  ,
         }}
-        ]}
+        ]})
+       
 
-        if(tags){  tags:{
+        if(tags.length>0)
+            andConditions.push({  tags:{
             hasEvery:tags   
-        }}
+        }})
+            
+
+        if(typeof isFeatured==="boolean"){
+            andConditions.push (
+                {
+                isFeatured
+            }
+            )
+        }
 
 const allPost =await prisma.post.findMany({
     where:{

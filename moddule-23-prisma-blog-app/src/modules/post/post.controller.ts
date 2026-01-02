@@ -28,9 +28,11 @@ try{
 
   const tags= req.query.tags ?(req.query.tags as string).split(','):[]
 
+  const isFeatured=req.query.isFeatured?req.query.isFeatured ==="true":false
 
   const searchString = typeof search==="string"?search:undefined
-  const result =await postService.getAllPost({search: searchString,tags})
+  const result =await postService.getAllPost({search: searchString,tags,isFeatured})
+  
 res.status(200).json(result)
 }catch(err){
 res.status(400).json({
