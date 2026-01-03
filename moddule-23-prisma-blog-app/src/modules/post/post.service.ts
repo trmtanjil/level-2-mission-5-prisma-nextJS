@@ -4,7 +4,10 @@ import { prisma } from "../../lib/prisma"
 
 
 const getAllPost=async({
-    search,tags,isFeatured,status,authorId,page,limit,skip}
+    search,tags,isFeatured,status,authorId,page,limit,
+    skip,
+    sortBy,
+    sortOrder}
     :{search:string |undefined,
     tags:string[]|[],
     isFeatured :boolean|undefined,
@@ -12,7 +15,9 @@ const getAllPost=async({
      authorId: string | undefined,
      page:number,
      limit:number,
-     skip:number
+     skip:number,
+     sortBy:string |undefined,
+     sortOrder:string | undefined
 })=>{
 
     const andConditions:PostWhereInput[]=[]
@@ -65,7 +70,10 @@ const allPost =await prisma.post.findMany({
     skip,
     where:{
    AND: andConditions
-    }
+    },
+    orderBy:sortBy && sortOrder?{
+        [sortBy]:sortOrder
+    }:{createdAt:'desc'}
 });
  return allPost;
 }
