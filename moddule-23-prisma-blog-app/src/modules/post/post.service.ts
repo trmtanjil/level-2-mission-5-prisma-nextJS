@@ -4,14 +4,15 @@ import { prisma } from "../../lib/prisma"
 
 
 const getAllPost=async({
-    search,tags,isFeatured,status,authorId,page,limit}
+    search,tags,isFeatured,status,authorId,page,limit,skip}
     :{search:string |undefined,
     tags:string[]|[],
     isFeatured :boolean|undefined,
      status: PostStatus | undefined,
      authorId: string | undefined,
      page:number,
-     limit:number
+     limit:number,
+     skip:number
 })=>{
 
     const andConditions:PostWhereInput[]=[]
@@ -60,6 +61,8 @@ const getAllPost=async({
         }
 
 const allPost =await prisma.post.findMany({
+    take:limit,
+    skip,
     where:{
    AND: andConditions
     }
