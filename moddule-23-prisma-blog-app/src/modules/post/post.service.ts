@@ -16,8 +16,8 @@ const getAllPost=async({
      page:number,
      limit:number,
      skip:number,
-     sortBy:string ,
-     sortOrder:string 
+     sortBy:string |undefined,
+     sortOrder:string | undefined
 })=>{
 
     const andConditions:PostWhereInput[]=[]
@@ -71,11 +71,27 @@ const allPost =await prisma.post.findMany({
     where:{
    AND: andConditions
     },
-    orderBy:{
+    orderBy:sortBy && sortOrder?{
         [sortBy]:sortOrder
-    }
+    }:{createdAt:'desc'}
 });
- return allPost;
+
+const total=await prisma.post.count({
+    where:{
+        AND:andConditions
+    }
+})
+
+ return {
+    data: allPost,
+    pagination:{
+        total,
+        page,
+        limit,
+        totalPages:Math.ceil(total/limit)
+    },
+
+ };
 }
 
 const createPost = async (data:Omit<Post,'id'|'createdAt'|'updatedAt'|'authorId'>,userId:string)=>{
