@@ -105,12 +105,27 @@ const createPost = async (data:Omit<Post,'id'|'createdAt'|'updatedAt'|'authorId'
 }
 
 const getPostById= async (postId:string)=>{
-const result = await prisma.post.findUnique({
+
+return await prisma.$transaction(async (trm)=>{
+
+ await trm.post.update({
+        where:{
+            id:postId
+        },
+        data:{
+            views:{
+                increment:1
+            }
+        }
+    })
+
+const postData = await trm.post.findUnique({
     where:{
         id:postId
     }
 })
-return result
+return postData;
+})
 }
 
 
