@@ -104,9 +104,14 @@ const createPost = async (data:Omit<Post,'id'|'createdAt'|'updatedAt'|'authorId'
     return result;
 }
 
+const getPostById= async (postId:string)=>{
+console.log('get post by id ')
+}
+
 
 
 export const postService={
     createPost,
-    getAllPost
+    getAllPost,
+    getPostById,
 }

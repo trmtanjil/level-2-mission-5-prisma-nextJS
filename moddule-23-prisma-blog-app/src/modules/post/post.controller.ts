@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { postService } from "./post.service";
 import { PostStatus } from "../../../generated/prisma/enums";
 import paginationSortingHelper from "../../paginationSortingHelper/paginationSortingHelper";
+import { error } from "node:console";
 
 
  const createPost = async (req:Request, res:Response)=>{
@@ -50,16 +51,10 @@ try{
   // const sortOrder = req.query.sortOrder as string |undefined;
 
   const {page, limit,skip,sortBy,sortOrder} = paginationSortingHelper(req.query)
+  
  
-
-
-
-
-
   const result =await postService.getAllPost({search: searchString,tags,isFeatured,status,authorId, page ,limit,skip,sortBy,sortOrder})
-
-
-
+ 
 res.status(200).json(result)
 }catch(err){
 res.status(400).json({
@@ -69,8 +64,28 @@ res.status(400).json({
 }
 }
 
+const getPostById= async(req:Request, res:Response)=>{
+  try{
+
+    const {postId}= req.params;
+    if(!postId){
+      throw new Error("post id required!!")
+    }
+    console.log({postId})
+
+    const result = postService.getPostById(postId);
+    return res.status(200).json(result)
+  }catch(error){
+res.status(400).json({
+            error:"Post creation faild",
+            details:error
+        })
+}
+}
+
 
  export const PostController = {
     createPost,
-    getAllPost
+    getAllPost,
+    getPostById
  }
