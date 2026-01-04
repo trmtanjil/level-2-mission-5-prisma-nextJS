@@ -73,7 +73,7 @@ const getPostById= async(req:Request, res:Response)=>{
     }
     console.log({postId})
 
-    const result = postService.getPostById(postId);
+    const result =await postService.getPostById(postId);
     return res.status(200).json(result)
   }catch(error){
 res.status(400).json({

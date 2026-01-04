@@ -105,7 +105,12 @@ const createPost = async (data:Omit<Post,'id'|'createdAt'|'updatedAt'|'authorId'
 }
 
 const getPostById= async (postId:string)=>{
-console.log('get post by id ')
+const result = await prisma.post.findUnique({
+    where:{
+        id:postId
+    }
+})
+return result
 }
 
 
