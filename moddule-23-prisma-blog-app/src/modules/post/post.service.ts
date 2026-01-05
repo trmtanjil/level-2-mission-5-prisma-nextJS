@@ -116,12 +116,16 @@ return await prisma.$transaction(async (trm)=>{
             views:{
                 increment:1
             }
+            
         }
     })
 
 const postData = await trm.post.findUnique({
     where:{
         id:postId
+    },
+    include:{
+        coments:true
     }
 })
 return postData;

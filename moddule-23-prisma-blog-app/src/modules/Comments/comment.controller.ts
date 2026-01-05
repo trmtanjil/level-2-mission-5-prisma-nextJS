@@ -7,6 +7,7 @@ try{
 
     const user = req.user;
     req.body.authorId = user?.id
+    console.log('userlkjs',user)
 
     const result = await commentService.createComment(req.body)
 
