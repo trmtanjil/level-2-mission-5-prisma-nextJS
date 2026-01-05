@@ -1,4 +1,4 @@
-import { Post, PostStatus } from "../../../generated/prisma/client";
+import { CommentStatus, Post, PostStatus } from "../../../generated/prisma/client";
 import { PostWhereInput } from "../../../generated/prisma/models";
 import { prisma } from "../../lib/prisma"
 
@@ -127,12 +127,20 @@ const postData = await trm.post.findUnique({
     include:{
         coments:{
             where:{
-                parentId:null
+                parentId:null,
+                status:CommentStatus.APROVED
             },
             include:{
                 repies:{
+                    where:{
+                        status:CommentStatus.APROVED
+                    },
                     include:{
-                        repies:true
+                        repies:{
+                            where:{
+                                status:CommentStatus.APROVED
+                            }
+                        }
                     }
                 }
             }
