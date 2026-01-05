@@ -130,16 +130,19 @@ const postData = await trm.post.findUnique({
                 parentId:null,
                 status:CommentStatus.APROVED
             },
+            orderBy:{createdAt:"desc"},
             include:{
                 repies:{
                     where:{
                         status:CommentStatus.APROVED
                     },
+                    orderBy:{createdAt:"asc"},
                     include:{
                         repies:{
                             where:{
                                 status:CommentStatus.APROVED
-                            }
+                            },
+                            orderBy:{createdAt:"asc"}
                         }
                     }
                 }
