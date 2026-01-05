@@ -147,8 +147,12 @@ const postData = await trm.post.findUnique({
                     }
                 }
             }
-        }
+        },
+         _count:{
+        select:{coments:true}
     }
+    }
+   
 })
 return postData;
 })
