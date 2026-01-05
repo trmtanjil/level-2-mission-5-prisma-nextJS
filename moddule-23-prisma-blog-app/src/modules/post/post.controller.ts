@@ -9,7 +9,9 @@ import { error } from "node:console";
       try{
         const user=req.user
         if(!user){
-         return  res.status(400).json({
+         return  res.status(400).json(
+          
+          {
             error:"unauthorized",
             
         })

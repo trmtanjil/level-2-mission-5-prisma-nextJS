@@ -17,7 +17,7 @@ credentials:true
 
 app.use("/post",postRouter)
 
-app.use("/comment",commentRouter)
+app.use("/comments",commentRouter)
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
