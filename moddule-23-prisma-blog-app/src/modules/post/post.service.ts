@@ -125,7 +125,18 @@ const postData = await trm.post.findUnique({
         id:postId
     },
     include:{
-        coments:true
+        coments:{
+            where:{
+                parentId:null
+            },
+            include:{
+                repies:{
+                    include:{
+                        repies:true
+                    }
+                }
+            }
+        }
     }
 })
 return postData;
