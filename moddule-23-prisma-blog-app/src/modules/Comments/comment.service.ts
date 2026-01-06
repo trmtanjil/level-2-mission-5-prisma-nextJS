@@ -45,8 +45,17 @@ const getCommentById=async(id:string)=>{
 
 }
 
+const getCommentAuthor=async(authorId:string)=>{
+return await  prisma.coment.findMany({
+    where:{
+      authorId
+    }
+})
+}
+
 
 export const commentService ={
     createComment,
-    getCommentById
+    getCommentById,
+    getCommentAuthor
 }

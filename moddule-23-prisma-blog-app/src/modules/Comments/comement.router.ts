@@ -9,6 +9,10 @@ router.get(
    "/:commentId",
    commentController.getCommentById
 )
+router.get(
+   "/authorId/:authorId",
+   commentController.getCommentAuthor
+)
 
  router.post(
     "/",
