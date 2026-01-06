@@ -9,10 +9,18 @@ router.get(
    "/:commentId",
    commentController.getCommentById
 )
+
+router.delete(
+   '/:commentId',
+   auth(UserRole.ADMIN,UserRole.USER),
+   commentController.deletComment
+)
+
 router.get(
    "/authorId/:authorId",
    commentController.getCommentAuthor
 )
+
 
  router.post(
     "/",

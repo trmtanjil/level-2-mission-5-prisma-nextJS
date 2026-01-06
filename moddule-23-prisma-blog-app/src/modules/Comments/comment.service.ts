@@ -1,3 +1,4 @@
+import { error } from "node:console"
 import { prisma } from "../../lib/prisma"
 
 const createComment = async(payload:{
@@ -63,9 +64,34 @@ return await  prisma.coment.findMany({
 })
 }
 
+//delete own comment 
+//will be loged in
+//checked own comment
+
+const deletComment = async(commentId:string, authorId:string)=>{
+    const commentData = await prisma.coment.findFirst({
+        where:{
+            id:commentId,
+            authorId
+        },
+        select:{
+            id:true
+        }
+    })
+    if(!commentData){
+        throw new Error ("your provide inpute is invelid")
+    }
+
+     return await prisma.coment.delete({
+        where:{
+            id:commentData.id
+        }
+    })
+}
 
 export const commentService ={
     createComment,
     getCommentById,
-    getCommentAuthor
+    getCommentAuthor,
+    deletComment
 }
