@@ -7,7 +7,6 @@ try{
 
     const user = req.user;
     req.body.authorId = user?.id
-    console.log('userlkjs',user)
 
     const result = await commentService.createComment(req.body)
 
@@ -22,6 +21,23 @@ res.status(401).json({
 }
 
 
+const getCommentById=async(req:Request,res:Response)=>{
+    try{
+        const {commentId}=req.params
+        const result = await commentService.getCommentById(commentId as string)
+        console.log('comment')
+        res.status(200).json(result)
+    }
+    catch(error){
+        res.status(401).json({
+            error:"comment not found by id ",
+            detail:error
+        })
+    }
+}
+
+
 export const commentController = {
-createComment
+createComment,
+getCommentById
 }

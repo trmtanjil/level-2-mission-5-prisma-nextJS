@@ -5,10 +5,14 @@ import { commentController } from "./comment.controller";
 
 const router = express.Router()
 
+router.get(
+   "/:commentId",
+   commentController.getCommentById
+)
 
  router.post(
     "/",
-    auth(UserRole.USER,UserRole.ADMIN),
+    auth(UserRole.USER,UserRole.ADMIN), 
     commentController.createComment
  )
 
