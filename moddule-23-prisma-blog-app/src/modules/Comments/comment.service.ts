@@ -49,6 +49,16 @@ const getCommentAuthor=async(authorId:string)=>{
 return await  prisma.coment.findMany({
     where:{
       authorId
+    },
+    orderBy:{createdAt:"desc"},
+    include:{
+        post:{
+           select:{
+            id:true,
+            title:true
+
+           }
+        }
     }
 })
 }
