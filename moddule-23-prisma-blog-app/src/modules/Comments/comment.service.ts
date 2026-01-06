@@ -35,7 +35,8 @@ const getCommentById=async(id:string)=>{
             post:{
                 select:{
                     id:true,
-                    title:true
+                    title:true,
+                    views:true
                 }
             }
         }
