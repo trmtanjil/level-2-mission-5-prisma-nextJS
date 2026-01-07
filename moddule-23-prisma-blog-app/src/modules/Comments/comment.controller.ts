@@ -85,9 +85,12 @@ const modarateComment =async(req:Request,res:Response)=>{
         const {commentId} = req.params
         const result=await commentService.modarateComment(commentId as string , req.body)
         res.status(200).json(result)
-    }catch(error){
+    }catch(error:any){
+        // const eM= (error instanceof Error)?error.message:"comment update faild"
+        // console.log(eM)
         res.status(401).json({
-            error:"comment status update faild",
+            
+            error:error.message||"Comment update faild",
             details:error
         })
     }

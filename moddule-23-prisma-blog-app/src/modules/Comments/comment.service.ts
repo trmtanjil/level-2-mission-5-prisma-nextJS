@@ -115,12 +115,16 @@ const updateComment=async(commentId:string,data:{content?:string, satatus?:Comme
 }
 
 const modarateComment = async (id:string, data:{status:CommentStatus})=>{
-    console.log('modarate comment ',{id , data})
-      await prisma.coment.findUnique({
+    const existingStatus=   await prisma.coment.findUnique({
         where:{
             id
         }
     })
+
+if(existingStatus?.status===data.status){
+    throw new Error(`Comment is already ${data.status.toLocaleLowerCase()}`)
+}
+
     return await prisma.coment.update({
         where:{
             id
