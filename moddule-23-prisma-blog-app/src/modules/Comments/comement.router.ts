@@ -15,6 +15,11 @@ router.patch(
    auth(UserRole.ADMIN,UserRole.USER),
    commentController.updateComment
 )
+router.patch(
+   "/:commentId/moderate",
+   commentController.modarateComment,
+   auth(UserRole.ADMIN)
+)
 
 router.delete(
    '/:commentId',
