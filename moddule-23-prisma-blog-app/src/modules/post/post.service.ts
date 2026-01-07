@@ -205,9 +205,36 @@ const getMyPost=async(authorId:string)=>{
     
 }
 
+const updatePost =async(postId:string, data:Partial<Post>, authorId:string)=>{
+    console.log(postId,data, authorId)
+
+    const postData = await prisma.post.findUniqueOrThrow({
+        where:{
+            id:postId
+        },
+        select:{
+            id:true,
+            authorId:true
+        }
+    })
+    if(postData.authorId!==authorId){
+        throw new Error("you are the not /owner of ther creation post")
+    }
+
+    const result= await prisma.post.update({
+        where:{
+            id:postData.id
+        },
+        data
+    })
+    return result
+}
+
+
 export const postService={
     createPost,
     getAllPost,
     getPostById,
-    getMyPost
+    getMyPost,
+    updatePost
 }

@@ -16,7 +16,7 @@ import { error } from "node:console";
             
         })
         }
-        console.log(req.user)
+    
         const result = await postService.createPost(req.body,user.id as string)
         res.status(201).json(result)
       }catch(e){
@@ -73,8 +73,7 @@ const getPostById= async(req:Request, res:Response)=>{
     if(!postId){
       throw new Error("post id required!!")
     }
-    console.log({postId})
-
+ 
     const result =await postService.getPostById(postId);
     return res.status(200).json(result)
   }catch(error){
@@ -102,9 +101,28 @@ const getMyPost = async(req:Request,res:Response)=>{
   }
 }
 
+const updatePost = async(req:Request,res:Response)=>{
+  try{
+    const user= req.user
+    if(!user){
+      throw new Error("you are unauthorized ")
+    }
+    const {postId}= req.params
+    const result =await postService.updatePost(postId as string,req.body,  user?.id as string)
+    res.status(200).json(result)
+  }catch(error){
+    const errorMessate = (error instanceof Error)?error.message:"post update faild"
+    res.send(400).json({
+      error: errorMessate,
+      details:error
+    })
+  }
+}
+
  export const PostController = {
     createPost,
     getAllPost,
     getPostById,
-    getMyPost
+    getMyPost,
+    updatePost
  }
