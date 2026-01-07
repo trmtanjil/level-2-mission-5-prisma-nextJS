@@ -86,8 +86,26 @@ res.status(400).json({
 }
 
 
+const getMyPost = async(req:Request,res:Response)=>{
+  try{
+    const user= req.user
+    if(!user){
+      throw new Error("you are unauthorized ")
+    }
+    console.log(user)
+    const result = postService.getMyPost(user?.id as string)
+    res.status(200).json(result)
+  }catch(error){
+    res.send(400).json({
+      error:'single post find faild',
+      details:error
+    })
+  }
+}
+
  export const PostController = {
     createPost,
     getAllPost,
-    getPostById
+    getPostById,
+    getMyPost
  }
