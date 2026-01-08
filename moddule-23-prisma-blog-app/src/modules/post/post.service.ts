@@ -2,6 +2,7 @@ import { date } from "better-auth/*";
 import { CommentStatus, Post, PostStatus } from "../../../generated/prisma/client";
 import { PostWhereInput } from "../../../generated/prisma/models";
 import { prisma } from "../../lib/prisma"
+import { deleteUser } from "better-auth/api";
 
 
 const getAllPost=async({
@@ -233,10 +234,15 @@ const updatePost =async(postId:string, data:Partial<Post>, authorId:string,isAdm
 }
 
 
+const deletePost = async(postId:string, authorId:string, isAdmin:boolean)=>{
+    console.log('delte user')
+}
+
 export const postService={
     createPost,
     getAllPost,
     getPostById,
     getMyPost,
-    updatePost
+    updatePost,
+    deletePost
 }
