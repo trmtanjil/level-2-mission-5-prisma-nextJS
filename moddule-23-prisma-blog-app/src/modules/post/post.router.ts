@@ -11,6 +11,11 @@ router.get(
     PostController.getAllPost
 )
 router.get(
+    "/stats",
+    auth(UserRole.ADMIN),
+    PostController.getStats
+)
+router.get(
     "/get-mypost",
     auth(UserRole.ADMIN,UserRole.USER),
     PostController.getMyPost,

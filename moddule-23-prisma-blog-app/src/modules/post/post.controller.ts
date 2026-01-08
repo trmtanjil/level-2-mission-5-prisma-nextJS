@@ -142,6 +142,24 @@ catch(error){
 
 }
 
+const getStats=async(req:Request, res:Response)=>{
+try{
+ const result = await postService.getStats(  )
+
+res.status(200).json(result)
+ 
+res.status(200).json( )
+}
+catch(error){
+    const errorMessate = (error instanceof Error)?error.message:"post update faild"
+    res.status(400).json({
+      error: errorMessate,
+      details:error
+    })
+  }
+
+}
+
 
  export const PostController = {
     createPost,
@@ -149,5 +167,6 @@ catch(error){
     getPostById,
     getMyPost,
     updatePost,
-    deletePost
+    deletePost,
+    getStats
  }

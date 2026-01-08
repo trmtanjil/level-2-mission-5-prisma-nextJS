@@ -257,11 +257,41 @@ if(!isAdmin && (postData.authorId !==authorId)){
     return result
 }
 
+const getStats = async()=>{
+//postCount, publishedPost, vewCount , draftPost , viewCont, totalComment
+return await prisma.$transaction(async(tx)=>{
+    const postCount = await tx.post.count();
+    const publishedPost =await tx.post.count({
+        where:{
+            status:PostStatus.PUBLISHED
+        }
+    })
+     const draftPost =await tx.post.count({
+        where:{
+            status:PostStatus.DRAFT
+        }
+    })
+     const archivedPost =await tx.post.count({
+        where:{
+            status:PostStatus.ARCHIVED
+        }
+    })
+    return {
+        postCount,
+        publishedPost,
+        draftPost,
+        archivedPost
+    }
+})
+
+}
+
 export const postService={
     createPost,
     getAllPost,
     getPostById,
     getMyPost,
     updatePost,
-    deletePost
+    deletePost,
+    getStats
 }
