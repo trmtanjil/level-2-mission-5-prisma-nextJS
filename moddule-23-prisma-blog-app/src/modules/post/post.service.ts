@@ -205,8 +205,7 @@ const getMyPost=async(authorId:string)=>{
     
 }
 
-const updatePost =async(postId:string, data:Partial<Post>, authorId:string)=>{
-    console.log(postId,data, authorId)
+const updatePost =async(postId:string, data:Partial<Post>, authorId:string,isAdmin:boolean)=>{
 
     const postData = await prisma.post.findUniqueOrThrow({
         where:{
@@ -217,7 +216,7 @@ const updatePost =async(postId:string, data:Partial<Post>, authorId:string)=>{
             authorId:true
         }
     })
-    if(postData.authorId!==authorId){
+    if(!isAdmin && (postData.authorId!==authorId)){
         throw new Error("you are the not /owner of ther creation post")
     }
 

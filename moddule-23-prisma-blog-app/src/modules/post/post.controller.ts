@@ -3,6 +3,7 @@ import { postService } from "./post.service";
 import { PostStatus } from "../../../generated/prisma/enums";
 import paginationSortingHelper from "../../paginationSortingHelper/paginationSortingHelper";
 import { error } from "node:console";
+import { UserRole } from "../../middalewared/auth";
 
 
  const createPost = async (req:Request, res:Response)=>{
@@ -107,12 +108,14 @@ const updatePost = async(req:Request,res:Response)=>{
     if(!user){
       throw new Error("you are unauthorized ")
     }
+    const isAdmin = user.role===UserRole.ADMIN
+    console.log(isAdmin,user)
     const {postId}= req.params
-    const result =await postService.updatePost(postId as string,req.body,  user?.id as string)
+    const result =await postService.updatePost(postId as string,req.body,  user?.id as string,isAdmin)
     res.status(200).json(result)
   }catch(error){
     const errorMessate = (error instanceof Error)?error.message:"post update faild"
-    res.send(400).json({
+    res.status(400).json({
       error: errorMessate,
       details:error
     })
