@@ -261,7 +261,7 @@ const getStats = async()=>{
 //postCount, publishedPost, vewCount , draftPost , viewCont, totalComment
 return await prisma.$transaction(async(tx)=>{
 
-    const [postCount, publishedPost,draftPost,archivedPost]=
+    const [postCount, publishedPost,draftPost,archivedPost,totalComments,aprovedComment,rejectComment]=
     await Promise.all([
  await tx.post.count(),
 await tx.post.count({
@@ -279,6 +279,9 @@ await tx.post.count({
             status:PostStatus.ARCHIVED
         }
     }),
+    await tx.coment.count(),
+    await tx.coment.count({where:{status:CommentStatus.APROVED}}),
+    await tx.coment.count({where:{status:CommentStatus.REJECT}})
     ])
 
  
@@ -286,7 +289,10 @@ await tx.post.count({
         postCount,
         publishedPost,
         draftPost,
-        archivedPost
+        archivedPost,
+        totalComments,
+        aprovedComment,
+        rejectComment
     }
 })
 
