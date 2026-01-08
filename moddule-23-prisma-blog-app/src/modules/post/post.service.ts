@@ -3,6 +3,7 @@ import { CommentStatus, Post, PostStatus } from "../../../generated/prisma/clien
 import { PostWhereInput } from "../../../generated/prisma/models";
 import { prisma } from "../../lib/prisma"
 import { deleteUser } from "better-auth/api";
+import { UserRole } from "../../middalewared/auth";
 
 
 const getAllPost=async({
@@ -261,7 +262,7 @@ const getStats = async()=>{
 //postCount, publishedPost, vewCount , draftPost , viewCont, totalComment
 return await prisma.$transaction(async(tx)=>{
 
-    const [postCount, publishedPost,draftPost,archivedPost,totalComments,aprovedComment,rejectComment]=
+    const [postCount, publishedPost,draftPost,archivedPost,totalComments,aprovedComment,rejectComment,totalUSERCount,userCount, adminCount,totalViewPost]=
     await Promise.all([
  await tx.post.count(),
 await tx.post.count({
@@ -281,7 +282,11 @@ await tx.post.count({
     }),
     await tx.coment.count(),
     await tx.coment.count({where:{status:CommentStatus.APROVED}}),
-    await tx.coment.count({where:{status:CommentStatus.REJECT}})
+    await tx.coment.count({where:{status:CommentStatus.REJECT}}),
+    await tx.user.count(),
+    await tx.user.count({where:{role:"USER"}}),
+    await tx.user.count({where:{role:"ADMIN"}}),
+    await tx.post.aggregate({_sum:{views:true}})
     ])
 
  
@@ -292,7 +297,11 @@ await tx.post.count({
         archivedPost,
         totalComments,
         aprovedComment,
-        rejectComment
+        rejectComment,
+        totalUSERCount,
+        userCount,
+        adminCount,
+        totalViewPost
     }
 })
 
