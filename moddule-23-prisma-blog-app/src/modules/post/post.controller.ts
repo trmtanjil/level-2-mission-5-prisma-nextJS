@@ -133,12 +133,12 @@ const result = await postService.deletePost(postId as string, user?.id as string
 res.status(200).json(result)
 }
 catch(error){
-res.status(400).json({
-  error:"post delte faild",
-  details:error
-
-})
-}
+    const errorMessate = (error instanceof Error)?error.message:"post update faild"
+    res.status(400).json({
+      error: errorMessate,
+      details:error
+    })
+  }
 
 }
 

@@ -235,7 +235,26 @@ const updatePost =async(postId:string, data:Partial<Post>, authorId:string,isAdm
 
 
 const deletePost = async(postId:string, authorId:string, isAdmin:boolean)=>{
-    console.log('delte user')
+  const postData = await prisma.post.findUniqueOrThrow({
+    where:{
+        id:postId
+    }   ,
+    select:{
+        id:true,
+        authorId:true
+    } 
+})
+
+if(!isAdmin && (postData.authorId !==authorId)){
+        throw new Error("you are the not /owner of ther creation post")
+    }
+
+    const result = await prisma.post.delete({
+        where:{
+            id:postId
+        }
+    }) 
+    return result
 }
 
 export const postService={
