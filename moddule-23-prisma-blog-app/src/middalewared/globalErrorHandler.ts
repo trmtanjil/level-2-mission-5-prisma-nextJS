@@ -39,6 +39,11 @@ function errorHandler (err:any,
       statusCode=400;
       errorMessage="error accured during query execution"
   }
+   //PrismaClientRustPanicError  
+    else if(err instanceof Prisma.PrismaClientRustPanicError ){
+ statusCode = 500;
+  errorMessage = "Internal database engine error"
+  }
   res.status(statusCode)
   res.json({
     message:errorMessage,
