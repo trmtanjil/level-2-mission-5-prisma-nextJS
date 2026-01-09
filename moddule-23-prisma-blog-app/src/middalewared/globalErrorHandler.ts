@@ -44,6 +44,17 @@ function errorHandler (err:any,
  statusCode = 500;
   errorMessage = "Internal database engine error"
   }
+  //PrismaClientInitializationError 
+  else if(err instanceof Prisma.PrismaClientInitializationError){
+    if(err.errorCode==="P1000"){
+      statusCode=401;
+      errorMessage="Authentication faild, please check your credintial"
+    }
+    else if(err.errorCode==="p1000"){
+      statusCode=500;
+      errorMessage="caccot reach your database server , please check your database "
+    }
+  }
   res.status(statusCode)
   res.json({
     message:errorMessage,
