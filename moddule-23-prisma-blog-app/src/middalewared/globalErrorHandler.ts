@@ -14,6 +14,24 @@ function errorHandler (err:any,
     statusCode=400;
     errorMessage="you provide incorrect field type or missing fields"
   }
+  //prismaCliendKnownRequiestError
+  if(err instanceof Prisma.PrismaClientKnownRequestError){
+    if(err.code ==="P2025"){
+      statusCode=400;
+
+      errorMessage="An operation failed because it depends on one or more records that were required but not found."
+    }
+    else  if(err.code ==="P1016"){
+      statusCode=400;
+
+      errorMessage="Your raw query had an incorrect number of parameters. Expected"
+    }
+      if(err.code ==="P2003"){
+      statusCode=400;
+
+      errorMessage="Foreign key constraint failed on the field"
+    }
+  }
   res.status(statusCode)
   res.json({
     message:errorMessage,
