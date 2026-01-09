@@ -32,6 +32,13 @@ function errorHandler (err:any,
       errorMessage="Foreign key constraint failed on the field"
     }
   }
+
+
+  //PrismaClientUnknownRequestError 
+    else if(err instanceof Prisma.PrismaClientUnknownRequestError){
+      statusCode=400;
+      errorMessage="error accured during query execution"
+  }
   res.status(statusCode)
   res.json({
     message:errorMessage,

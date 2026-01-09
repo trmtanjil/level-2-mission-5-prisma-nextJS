@@ -99,7 +99,7 @@ const getMyPost = async(req:Request,res:Response)=>{
   }
 }
 
-const updatePost = async(req:Request,res:Response)=>{
+const updatePost = async(req:Request,res:Response,next:NextFunction)=>{
   try{
     const user= req.user
     if(!user){
@@ -111,11 +111,12 @@ const updatePost = async(req:Request,res:Response)=>{
     const result =await postService.updatePost(postId as string,req.body,  user?.id as string,isAdmin)
     res.status(200).json(result)
   }catch(error){
-    const errorMessate = (error instanceof Error)?error.message:"post update faild"
-    res.status(400).json({
-      error: errorMessate,
-      details:error
-    })
+    next(error)
+    // const errorMessate = (error instanceof Error)?error.message:"post update faild"
+    // res.status(400).json({
+    //   error: errorMessate,
+    //   details:error
+    // })
   }
 }
 
