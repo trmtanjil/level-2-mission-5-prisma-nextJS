@@ -1,6 +1,6 @@
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import {   Menu,   } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -48,7 +48,7 @@ interface Navbar1Props {
   auth?: {
     login: {
       title: string;
-      url: string;
+      url:string;
     };
     signup: {
       title: string;
@@ -86,8 +86,8 @@ const Navbar = ({
     },
   ],
   auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
+    login: { title: "Login", url: "/login" },
+    signup: { title: "Sign up", url: "/logout" },
   },
   className,
 }: Navbar1Props) => {
