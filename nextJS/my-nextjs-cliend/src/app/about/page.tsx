@@ -1,7 +1,12 @@
 import React from 'react'
 
-export default function Aboutpage() {
+export  default async function Aboutpage() {
+
+ await new Promise((resolve)=>setTimeout(resolve, 4000))
+
+ throw new Error ("something went wrong")
+
   return (
-    <div>Aboutpage</div>
+    <div>this is Aboutpage</div>
   )
 }
