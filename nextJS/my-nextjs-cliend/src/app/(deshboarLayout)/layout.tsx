@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
  import { Children } from "react"
-import admindeshboard from "./@admin/admin-deshboard/page"
 
 export default function DeshboardLayout({
   admin,
@@ -24,6 +23,11 @@ export default function DeshboardLayout({
    admin:React.ReactNode;
    user:React.ReactNode
 }) {
+
+const userinfo ={
+  rolle : "user",
+  
+}
 
 
    const menu = [
@@ -62,8 +66,7 @@ export default function DeshboardLayout({
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {admin}
-          {user}
+         {userinfo.rolle ==="admin"?admin:user}
         </div>
       </SidebarInset>
     </SidebarProvider>
