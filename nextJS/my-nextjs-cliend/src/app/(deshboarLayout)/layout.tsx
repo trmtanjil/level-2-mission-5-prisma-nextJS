@@ -46,9 +46,6 @@ export default function DeshboardLayout({children}:{children:React.ReactNode}) {
             ))}
 
 
-
-
-
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
