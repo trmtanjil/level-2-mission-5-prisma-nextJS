@@ -1,4 +1,6 @@
-   export const adminRoutes=[
+import { Route } from "@/types";
+
+   export const adminRoutes:Route[]=[
     {
       title: "user menegment",
     
@@ -6,8 +8,7 @@
         {
           title: "analytics user",
           url: "/analytics",
-        },
-       
+        },     
       ],
     },
  
