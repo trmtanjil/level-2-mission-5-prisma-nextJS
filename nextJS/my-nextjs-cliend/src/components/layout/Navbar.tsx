@@ -85,6 +85,10 @@ const Navbar = ({
     {
       title:"deshboard",
       url:"/deshboard"
+    },
+      {
+      title:"Prectice",
+      url:"/prectice"
     }
   ],
   auth = {
