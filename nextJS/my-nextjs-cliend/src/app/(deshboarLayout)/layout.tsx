@@ -13,9 +13,16 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Children } from "react"
+import Link from "next/link"
+ import { Children } from "react"
 
 export default function DeshboardLayout({children}:{children:React.ReactNode}) {
+
+
+   const menu = [
+    { title: "Home", url: "/#" },
+   ]
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -28,14 +35,24 @@ export default function DeshboardLayout({children}:{children:React.ReactNode}) {
           />
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
+           
+
+            {menu.map((item, index)=> (
+              <BreadcrumbItem key={index}>
+                <BreadcrumbPage >
+                <Link href={item.url}>{item.title}</Link>
+                </BreadcrumbPage>
               </BreadcrumbItem>
+            ))}
+
+
+
+
+
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
