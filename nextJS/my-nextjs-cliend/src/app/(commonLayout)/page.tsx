@@ -1,26 +1,14 @@
- 
-
-import { Button } from "@/components/ui/button";
-import { cookies } from "next/headers";
- 
+ import { Button } from "@/components/ui/button";
+import { userService } from "@/services/user.service";
+  
 
 
 export default async function Home() {
 
-  const cookieStore =await cookies()
-  console.log("cokie store",cookieStore.toString())
+  const {data} = await userService.getSession();
+
+  console.log(data)
  
-  const res = await fetch("http://localhost:5000/api/auth/get-session",{
-    headers:{
-      Cookie:cookieStore.toString()
-    },
-    cache:"no-store"
-  })
-
-  const session =await res.json()
-
-  console.log("res clg",session)
-
   return (
     <div>
       <Button>Click heare</Button>
