@@ -25,8 +25,9 @@ getSession: async function () {
   }
 
    }
-   catch(err){
-    console.error({data:null,err:{message:"somthin went wrong"}})
-   }
+   catch (err) {
+  console.error(err);
+  return { data: null, error: { message: "Something went wrong" } }; // Return kora dorkar
+}
 }
 }
