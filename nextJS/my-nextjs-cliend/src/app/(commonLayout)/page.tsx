@@ -14,7 +14,7 @@ export default async function Home() {
     headers:{
       Cookie:cookieStore.toString()
     },
-    
+    cache:"no-store"
   })
 
   const session =await res.json()
