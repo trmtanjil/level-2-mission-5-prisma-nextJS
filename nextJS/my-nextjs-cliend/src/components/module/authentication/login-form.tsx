@@ -23,10 +23,8 @@ export function LoginForm({
       provider:"google",
       callbackURL:"http://localhost:3000"
     })
-    console.log(data)
-  }
-  
-  const sessionL = authClient.getSession()
+   }
+   const sessionL = authClient.getSession()
   console.log("sessionL",sessionL)
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
