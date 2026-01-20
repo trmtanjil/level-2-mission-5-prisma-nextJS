@@ -8,20 +8,22 @@ import errorHandler from "./middalewared/globalErrorHandler";
 import { notFount } from "./middalewared/notFound";
 
 const app: Application = express();
-app.use(express.json());
 
 
 app.use(cors({
-origin:process.env.APP_URL|| "http://localhost:4000",
-credentials:true
+    origin:process.env.APP_URL|| "http://localhost:3000",
+    credentials:true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"] 
 }))
+ 
 
-
+app.all("/api/auth/*splat", toNodeHandler(auth));
+app.use(express.json());
 app.use("/post",postRouter)
 
 app.use("/comments",commentRouter)
 
-app.all("/api/auth/*splat", toNodeHandler(auth));
 
 
 
@@ -33,3 +35,9 @@ app.use(notFount)
 app.use(errorHandler)
 
 export default app;
+
+
+ 
+
+ 
+ 
