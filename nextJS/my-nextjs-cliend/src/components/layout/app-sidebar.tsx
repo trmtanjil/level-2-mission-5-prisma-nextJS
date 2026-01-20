@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from "react";
 
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
+import { SearchForm } from "@/components/layout/search-form";
+import { VersionSwitcher } from "@/components/layout/version-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -13,19 +13,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { adminRoutes } from "@/routes/adminRoutes"
-import { userRoutes } from "@/routes/userRoutes"
- import { Route } from "@/types";
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { adminRoutes } from "@/routes/adminRoutes";
+import { userRoutes } from "@/routes/userRoutes";
+import { Route } from "@/types";
 
- 
-
-export function AppSidebar({ user, ...props }: {
-  user: { role: string }
-  & React.ComponentProps<typeof Sidebar>
+export function AppSidebar({
+  user,
+  ...props
+}: {
+  user: { role: string } & React.ComponentProps<typeof Sidebar>;
 }) {
-      
-let routes:Route[] =[];
+  let routes: Route[] = [];
 
   switch (user.role) {
     case "admin":
@@ -39,12 +39,9 @@ let routes:Route[] =[];
       break;
   }
 
-
   return (
     <Sidebar {...props}>
-   
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
@@ -52,8 +49,8 @@ let routes:Route[] =[];
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton  >
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -64,5 +61,5 @@ let routes:Route[] =[];
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

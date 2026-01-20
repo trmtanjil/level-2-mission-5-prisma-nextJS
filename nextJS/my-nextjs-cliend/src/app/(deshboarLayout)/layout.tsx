@@ -1,4 +1,4 @@
- import { AppSidebar } from "@/components/layout/app-sidebar";
+import { AppSidebar } from "@/components/layout/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,16 +6,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-
-import Link from "next/link"
- import { Children } from "react"
 
 export default function DashboardLayout({
   admin,
@@ -25,19 +22,13 @@ export default function DashboardLayout({
   admin: React.ReactNode;
   user: React.ReactNode;
 }) {
-
- const userInfo = {
-    role: "admin",
+  const userInfo = {
+    role: "user",
   };
-
-
-   const menu = [
-    { title: "Home", url: "/#" },
-   ]
 
   return (
     <SidebarProvider>
-      <AppSidebar user={userInfo}/>
+      <AppSidebar user={userInfo} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -47,29 +38,23 @@ export default function DashboardLayout({
           />
           <Breadcrumb>
             <BreadcrumbList>
-           
-
-            {menu.map((item, index)=> (
-              <BreadcrumbItem key={index}>
-                <BreadcrumbPage >
-                <Link href={item.url}>{item.title}</Link>
-                </BreadcrumbPage>
+              <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbLink href="#">
+                  Building Your Application
+                </BreadcrumbLink>
               </BreadcrumbItem>
-            ))}
-
-
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-         {userInfo.role ==="admin"?admin:user}
+          {userInfo.role === "admin" ? admin : user}
+     
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
