@@ -1,5 +1,4 @@
-import React from 'react'
-
-export default function userDefault() {
+ 
+export default function adminDefault() {
   return null
 }

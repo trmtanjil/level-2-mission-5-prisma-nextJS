@@ -1,7 +1,9 @@
-import React from 'react'
 
-export default function admindeshboard() {
+
+export default function AdminDashboard() {
   return (
-    <div>admin deshboard</div>
-  )
+    <div>
+      <h1> Admin Dashboard </h1>
+    </div>
+  );
 }

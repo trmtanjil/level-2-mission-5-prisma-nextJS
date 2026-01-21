@@ -1,6 +1,8 @@
-import React from 'react'
+ 
+export default async function userDaseboard() {
 
-export default function userDaseboard() {
+ 
+
   return (
     <div>user Daseboard</div>
   )

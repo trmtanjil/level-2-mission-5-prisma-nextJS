@@ -23,7 +23,7 @@ export default function DashboardLayout({
   user: React.ReactNode;
 }) {
   const userInfo = {
-    role: "user",
+    role: "admin",
   };
 
   return (
@@ -50,9 +50,8 @@ export default function DashboardLayout({
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
+           <div className="flex flex-1 flex-col gap-4 p-4">
           {userInfo.role === "admin" ? admin : user}
-     
         </div>
       </SidebarInset>
     </SidebarProvider>
