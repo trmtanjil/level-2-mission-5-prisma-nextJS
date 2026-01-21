@@ -11,6 +11,13 @@ export const env =createEnv({
         AUTH_URL:z.url()
     },
 
+    //client example 
     // client:{}
-    runtimeEnv:{}
+    runtimeEnv:{
+            BACKEND_URL: process.env.BACKEND_URL,
+        FRONTEND_URL:process.env.FRONTEND_URL,
+
+        API_URL:process.env.API_URL,
+        AUTH_URL:process.env.AUTH_URL
+    }
 })
