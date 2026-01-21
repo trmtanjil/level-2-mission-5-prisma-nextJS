@@ -15,7 +15,6 @@ export async function proxy(request:NextRequest){
         isAuthenticated=true;
         isAdmin=data.user.role=== Roles.admin
     }
-console.log(isAdmin)
     if(!isAuthenticated){
         return NextResponse.redirect(new URL("/login",request.url))
     }
@@ -31,7 +30,6 @@ console.log(isAdmin)
     return NextResponse.redirect(new URL("/deshboard",request.url))
 }
 
-    console.log("from proxy",pathName)
 return NextResponse.next()
 }
 
