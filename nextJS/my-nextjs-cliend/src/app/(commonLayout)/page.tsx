@@ -1,5 +1,7 @@
- import { Button } from "@/components/ui/button";
+ import BlogCard from "@/components/module/homepage/blogCard";
+import { Button } from "@/components/ui/button";
 import { blogServices } from "@/services/blog.services";
+import { BlogPost } from "@/types";
    
 
 
@@ -9,8 +11,12 @@ export default async function Home() {
  console.log(data)
  
   return (
-    <div>
-      <Button>Click heare</Button>
+    <div className="grid grid-cols-3 max-w-[90%] gap-3 justify-around mx-auto">
+      {
+        data?.data?.map((post:BlogPost)=>(
+          <BlogCard key={post.id} post={post}></BlogCard>
+        ))
+      }
     </div>
   );
 }
