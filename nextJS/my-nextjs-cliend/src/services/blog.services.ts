@@ -3,10 +3,46 @@ import { env } from "@/env"
 
 const API_URL=env.API_URL
 
+interface ServiceOptions{
+    cache?:RequestCache,
+    revalidate?:number
+}
+
+interface BlogPostParams {
+    isFeatured?:boolean,
+    search?:""
+}
+
 export const blogServices={
-    getBlogPosts: async function(){
+    getBlogPosts: async function(params:BlogPostParams,options?:ServiceOptions){
         try{
-            const res =await fetch(`${API_URL}/post`,{next: {revalidate:10}})
+
+            const url = new URL(`${API_URL}/post`)
+
+            console.log( Object.entries(params))
+            if(params){
+                Object.entries(params).forEach(([key,value])=>{
+                    if(value !==undefined && value !==null && value !==""){
+                        url.searchParams.append(key,value)
+                    }
+
+                })
+            }
+
+            // url.searchParams.append("key", "value")
+            // console.log("url",url.toString())
+
+            const config:RequestInit={};
+            if(options?.cache){
+                config.cache= options.cache
+            }
+
+            if(options?.revalidate){
+                config.next = {revalidate:options.revalidate}
+            }
+
+            const res =await fetch(url.toString(),config)
+            console.log("res",res)
 
             const data =await res.json()
 

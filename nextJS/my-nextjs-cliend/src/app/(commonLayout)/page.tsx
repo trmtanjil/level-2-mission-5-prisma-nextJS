@@ -7,7 +7,11 @@ import { BlogPost } from "@/types";
 
 export default async function Home() {
 
- const {data}=await blogServices.getBlogPosts()
+ const {data}=await blogServices.getBlogPosts({
+  isFeatured:false,
+ },{
+  cache:"no-store"
+ })
  console.log(data)
  
   return (
