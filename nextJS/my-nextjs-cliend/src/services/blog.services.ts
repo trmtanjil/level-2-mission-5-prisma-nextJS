@@ -1,4 +1,5 @@
 import { env } from "@/env"
+import { error } from "console"
 
 
 const API_URL=env.API_URL
@@ -16,10 +17,10 @@ interface BlogPostParams {
 export const blogServices={
     getBlogPosts: async function(params:BlogPostParams,options?:ServiceOptions){
         try{
+             const url = new URL(`${API_URL}/post`)
 
-            const url = new URL(`${API_URL}/post`)
+            // console.log( Object.entries(params))
 
-            console.log( Object.entries(params))
             if(params){
                 Object.entries(params).forEach(([key,value])=>{
                     if(value !==undefined && value !==null && value !==""){
@@ -42,9 +43,10 @@ export const blogServices={
             }
 
             const res =await fetch(url.toString(),config)
-            console.log("res",res)
+            // console.log("res",res)
 
             const data =await res.json()
+            console.log("data",data)
 
 
             //this is an example
@@ -56,6 +58,21 @@ export const blogServices={
             return {data:data, eroor:null }
         }
         catch(err){
+            return {data:null, error:{message:"somthin went wrong for fetch"}}
+        }
+    },
+
+
+
+
+    getBlogById:async function(id:string){
+        try{
+            const res = await fetch (`${API_URL}/post/${id}`);
+            const data= await res.json()
+
+            return {data:data, error:null}
+        }
+         catch(err){
             return {data:null, error:{message:"somthin went wrong for fetch"}}
         }
     }
