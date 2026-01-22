@@ -1,18 +1,39 @@
 import { blogServices } from '@/services/blog.services';
 import React from 'react';
 import { notFound } from 'next/navigation';
+import { BlogPost } from '@/types';
 
-export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
+
+// Return a list of `params` to populate the [slug] dynamic segment
+// export async function generateStaticParams(){
+//   const {data}= await blogServices.getBlogPosts();
+
+//   return data?.data?.map((post:BlogPost)=>({id:post.id}))
+// }
+
+
+
+export default async function BlogPage({ params }:
+   { params: Promise<{ id: string }> }) {
   // ১. প্যারামস থেকে ID টি বের করে নেওয়া
   const { id } = await params;
 
   // ২. সার্ভিস থেকে ডাটা ফেচ করা
   const { data: post, error } = await blogServices.getBlogById(id);
 
+  const {data}= await blogServices.getBlogPosts();
+  const arrayofid  =  data?.data?.map((post:BlogPost)=>({id:post.id}))
+  console.log('arrayofid', arrayofid)
+
   // ৩. যদি ডাটা না পাওয়া যায় বা এরর হয়
   if (error || !post) {
     return notFound(); // ৪০৪ পেজ দেখাবে
   }
+
+
+
+
+
 
   return (
     <main className="max-w-4xl mx-auto p-6">

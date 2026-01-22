@@ -15,11 +15,13 @@ interface BlogPostParams {
 }
 
 export const blogServices={
-    getBlogPosts: async function(params:BlogPostParams,options?:ServiceOptions){
+    getBlogPosts: async function(
+        params?:BlogPostParams,
+        options?:ServiceOptions
+    ){
         try{
              const url = new URL(`${API_URL}/post`)
 
-            console.log( Object.entries(params))
 
             if(params){
                 Object.entries(params).forEach(([key,value])=>{
