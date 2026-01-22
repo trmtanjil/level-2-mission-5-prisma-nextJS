@@ -1,13 +1,29 @@
+"use client";
 
-export const dynamic = 'force-dynamic'
+import { blogServices } from "@/services/blog.services";
+import { useEffect, useState } from "react"
 
-export  default async function Aboutpage() {
+ 
+export  default  function Aboutpage() {
 
- await new Promise((resolve)=>setTimeout(resolve, 4000))
+  const [data, setData]= useState();
 
-//  throw new Error ("something  went wrong")
+  console.log( "data c",data)
 
+  useEffect(()=>{
+    (async ()=>{
+      const {data} = await blogServices.getBlogPosts()
+
+      setData(data)
+    })();
+  },[])
+
+  
   return (
     <div>this is Aboutpage</div>
   )
 }
+
+//  await new Promise((resolve)=>setTimeout(resolve, 4000))
+
+//  throw new Error ("something  went wrong")
