@@ -8,7 +8,8 @@ export const userService ={
 getSession: async function () {
    try {
        const cookieStore =await cookies()
-  console.log("cokie store",cookieStore.toString())
+  //      console.log(cookieStore)
+  // console.log("cokie store",cookieStore.toString())
  
   const res = await fetch(`${AUTH_URL}/get-session`,{
     headers:{
