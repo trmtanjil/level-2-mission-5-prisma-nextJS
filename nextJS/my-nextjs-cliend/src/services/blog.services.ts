@@ -19,7 +19,7 @@ export const blogServices={
         try{
              const url = new URL(`${API_URL}/post`)
 
-            // console.log( Object.entries(params))
+            console.log( Object.entries(params))
 
             if(params){
                 Object.entries(params).forEach(([key,value])=>{
