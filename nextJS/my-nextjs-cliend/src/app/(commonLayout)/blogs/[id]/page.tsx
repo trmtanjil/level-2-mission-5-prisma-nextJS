@@ -6,6 +6,8 @@ export default async function BlogPage({params}:
     const {id} = await params
 
   return (
-    <div>this is blogPage{id}</div>
+    <div>
+      <h1>this is blogPage{id}</h1>
+    </div>
   )
 }
