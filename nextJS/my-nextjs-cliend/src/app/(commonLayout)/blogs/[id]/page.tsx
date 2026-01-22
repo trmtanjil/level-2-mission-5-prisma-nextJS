@@ -4,11 +4,13 @@ import { notFound } from 'next/navigation';
 import { BlogPost } from '@/types';
 
 
+
+export const dynamicParams =  false
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams(){
   const {data}= await blogServices.getBlogPosts();
 
-  return data?.data?.map((post:BlogPost)=>({id:post.id}))
+  return data?.data?.slice(0,3).map((post:BlogPost)=>({id:post.id}))
 }
 
 
