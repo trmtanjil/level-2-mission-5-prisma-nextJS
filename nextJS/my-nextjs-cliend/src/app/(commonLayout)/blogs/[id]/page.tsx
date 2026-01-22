@@ -22,7 +22,7 @@ export default async function BlogPage({ params }:
   const { data: post, error } = await blogServices.getBlogById(id);
 
   const {data}= await blogServices.getBlogPosts();
-  const arrayofid  =  data?.data?.map((post:BlogPost)=>({id:post.id}))
+  const arrayofid  =  data?.data?.slice(0,3).map((post:BlogPost)=>({id:post.id}))
   console.log('arrayofid', arrayofid)
 
   // ৩. যদি ডাটা না পাওয়া যায় বা এরর হয়
