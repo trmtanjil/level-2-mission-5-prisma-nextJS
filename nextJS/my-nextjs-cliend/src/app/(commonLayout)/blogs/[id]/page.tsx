@@ -5,11 +5,11 @@ import { BlogPost } from '@/types';
 
 
 // Return a list of `params` to populate the [slug] dynamic segment
-// export async function generateStaticParams(){
-//   const {data}= await blogServices.getBlogPosts();
+export async function generateStaticParams(){
+  const {data}= await blogServices.getBlogPosts();
 
-//   return data?.data?.map((post:BlogPost)=>({id:post.id}))
-// }
+  return data?.data?.map((post:BlogPost)=>({id:post.id}))
+}
 
 
 
@@ -21,9 +21,9 @@ export default async function BlogPage({ params }:
   // ২. সার্ভিস থেকে ডাটা ফেচ করা
   const { data: post, error } = await blogServices.getBlogById(id);
 
-  const {data}= await blogServices.getBlogPosts();
-  const arrayofid  =  data?.data?.slice(0,3).map((post:BlogPost)=>({id:post.id}))
-  console.log('arrayofid', arrayofid)
+  // const {data}= await blogServices.getBlogPosts();
+  // const arrayofid  =  data?.data?.slice(0,3).map((post:BlogPost)=>({id:post.id}))
+  // console.log('arrayofid', arrayofid)
 
   // ৩. যদি ডাটা না পাওয়া যায় বা এরর হয়
   if (error || !post) {
