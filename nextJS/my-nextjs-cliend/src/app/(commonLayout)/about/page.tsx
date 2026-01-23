@@ -1,20 +1,23 @@
 "use client";
 
-import { blogServices } from "@/services/blog.services";
+import { getblogs } from "@/actions/blog.action";
 import { useEffect, useState } from "react"
 
  
 export  default  function Aboutpage() {
 
   const [data, setData]= useState();
+  const [error, setError]=useState <{message : string } | null |undefined>(null);
 
   console.log( "data c",data)
+  console.log(error)
 
   useEffect(()=>{
     (async ()=>{
-      const {data} = await blogServices.getBlogPosts()
+      const {data,error} = await  getblogs()
 
       setData(data)
+      setError(error)
     })();
   },[])
 
