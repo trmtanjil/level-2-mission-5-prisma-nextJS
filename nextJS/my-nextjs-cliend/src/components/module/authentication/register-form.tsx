@@ -57,7 +57,7 @@ onSubmit : async ({value})=>{
               const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid
             return(
-              <Field>
+              <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>Name</FieldLabel>
                 <Input 
                 type="text"
