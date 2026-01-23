@@ -9,10 +9,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useForm} from "@tanstack/react-form"
+import * as z from "zod"
  
+const formSchema = z.object({
+  name:z.string().min(1, "This feild is requred"),
+  password:z.string().min(8,"This feild is required"),
+  email:z.email()
+})
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
 
 const form = useForm ({
@@ -20,6 +26,9 @@ defaultValues : {
 name:"",
 email:"",
 password:""
+},
+validators:{
+onSubmit:formSchema,
 },
 onSubmit : async ({value})=>{
   console.log("form submit ", value)
@@ -45,6 +54,8 @@ onSubmit : async ({value})=>{
   
         <FieldGroup>
           <form.Field name="name" children={(field)=>{
+              const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
             return(
               <Field>
                 <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -57,11 +68,16 @@ onSubmit : async ({value})=>{
 
                 }
                 /> 
+                {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
               </Field>
             )
           }}/> 
 
            <form.Field name="email" children={(field)=>{
+              const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
             return(
               <Field>
                 <FieldLabel htmlFor={field.name}>Emial</FieldLabel>
@@ -73,11 +89,16 @@ onSubmit : async ({value})=>{
 
                 }
                 /> 
+                  {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
               </Field>
             )
           }}/>
 
            <form.Field name="password" children={(field)=>{
+              const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
             return(
               <Field>
                 <FieldLabel htmlFor={field.name}>password</FieldLabel>
@@ -90,6 +111,9 @@ onSubmit : async ({value})=>{
 
                 }
                 /> 
+                  {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
               </Field>
             )
           }}/>
