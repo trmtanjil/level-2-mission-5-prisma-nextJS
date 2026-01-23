@@ -9,8 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { FieldGroup } from "@/components/ui/field"
-import {Field, useForm} from "@tanstack/react-form"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { useForm} from "@tanstack/react-form"
  
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
 
@@ -43,9 +44,55 @@ onSubmit : async ({value})=>{
         }}>
   
         <FieldGroup>
-          <form.Field
-          name="name" children={()=><Field></Field>}
-          /> 
+          <form.Field name="name" children={(field)=>{
+            return(
+              <Field>
+                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                <Input 
+                type="text"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onChange={(e)=>field.handleChange(e.target.value)
+
+                }
+                /> 
+              </Field>
+            )
+          }}/> 
+
+           <form.Field name="email" children={(field)=>{
+            return(
+              <Field>
+                <FieldLabel htmlFor={field.name}>Emial</FieldLabel>
+                <Input 
+                type="email"
+                name={field.name}
+                value={field.state.value}
+                onChange={(e)=>field.handleChange(e.target.value)
+
+                }
+                /> 
+              </Field>
+            )
+          }}/>
+
+           <form.Field name="password" children={(field)=>{
+            return(
+              <Field>
+                <FieldLabel htmlFor={field.name}>password</FieldLabel>
+                <Input 
+                type="password"
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onChange={(e)=>field.handleChange(e.target.value)
+
+                }
+                /> 
+              </Field>
+            )
+          }}/>
         </FieldGroup>
 
         </form>
