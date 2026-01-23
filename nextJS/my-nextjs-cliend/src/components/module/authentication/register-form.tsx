@@ -143,64 +143,18 @@ onSubmit : async ({value})=>{
 
         </form>
       </CardContent>
-      <CardFooter>
- <div className="space-y-4 mt-6">
-  {/* Submit button */}
-  <Button
-    form="login-form"
-    type="submit"
-    className="w-full h-11 text-base font-semibold rounded-md"
-  >
-    Create Account
-  </Button>
-
-  {/* Divider */}
-  <div className="relative">
-    <div className="absolute inset-0 flex items-center">
-      <span className="w-full border-t" />
-    </div>
-    <div className="relative flex justify-center text-xs uppercase">
-      <span className="bg-background px-2 text-muted-foreground">
-        Or continue with
-      </span>
-    </div>
-  </div>
-
-  {/* Google button */}
-  <Button
-    type="button"
-    variant="outline"
-    onClick={handleGoogleLogin}
-    className="w-full mx-auto h-11 flex items-center justify-center gap-2 rounded-md"
-  >
-    {/* Google Icon */}
-    <svg
-      className="h-4 w-4"
-      viewBox="0 0 48 48"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill="#EA4335"
-        d="M24 9.5c3.54 0 6.03 1.53 7.42 2.8l5.46-5.46C33.14 3.44 28.96 1.5 24 1.5 14.73 1.5 6.98 6.98 3.96 14.92l6.53 5.07C12.3 14.04 17.68 9.5 24 9.5z"
-      />
-      <path
-        fill="#4285F4"
-        d="M46.5 24c0-1.62-.15-3.18-.43-4.68H24v9.07h12.7c-.55 2.95-2.2 5.45-4.7 7.13l7.28 5.64C43.86 36.92 46.5 30.95 46.5 24z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M10.49 28.99A14.5 14.5 0 0 1 9.5 24c0-1.73.3-3.4.85-4.99l-6.53-5.07A23.9 23.9 0 0 0 1.5 24c0 3.9.94 7.58 2.32 10.82l6.67-5.83z"
-      />
-      <path
-        fill="#34A853"
-        d="M24 46.5c6.48 0 11.92-2.14 15.9-5.82l-7.28-5.64c-2.02 1.36-4.6 2.16-8.62 2.16-6.32 0-11.7-4.54-13.51-10.49l-6.67 5.83C6.93 40.98 14.73 46.5 24 46.5z"
-      />
-    </svg>
-
-    <span className="font-medium">Register with Google</span>
-  </Button>
-</div>
-
+         <CardFooter className="flex flex-col gap-5 justify-end">
+        <Button form="login-form" type="submit" className="w-full">
+          Register
+        </Button>
+        <Button
+          onClick={() => handleGoogleLogin()}
+          variant="outline"
+          type="button"
+          className="w-full"
+        >
+          Continue with Google
+        </Button>
       </CardFooter>
     </Card>
   )
