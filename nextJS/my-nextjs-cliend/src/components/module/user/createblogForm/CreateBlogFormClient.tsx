@@ -1,5 +1,6 @@
 "use client";
 
+import { createBlogPost } from "@/actions/blog.action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
@@ -45,7 +46,8 @@ export function CreageBlogFormClient(){
       console.log(blogData)
 
       try {
-      
+      const res = await createBlogPost(blogData)
+      console.log(res)
 
 
       }  catch (err) {

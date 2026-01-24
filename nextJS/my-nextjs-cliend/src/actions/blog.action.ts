@@ -10,5 +10,7 @@ import { BlogData, blogServices } from "@/services/blog.services"
 }
  
 export const createBlogPost = async (data:BlogData)=>{
-    return await blogServices.createBlogPost(data)
+    const res= await blogServices.createBlogPost(data)
+    updateTag("blogPost")
+    return res
 }

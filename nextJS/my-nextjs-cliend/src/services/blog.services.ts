@@ -14,11 +14,7 @@ interface BlogPostParams {
     isFeatured?:boolean,
     search?:""
 }
-interface blogData{
-    title:string,
-    content:string,
-    blog?:string[]
-}
+ 
 export interface BlogData {
   title: string;
   content: string;
@@ -93,11 +89,11 @@ export const blogServices={
          catch(err){
             return {data:null, error:{message:"somthin went wrong for fetch"}}
         }
-    }
+    },
 
 
 
-    createBlogPost :async(blogData:blogData)=>{
+    createBlogPost :async(blogData:BlogData)=>{
         try{
              const cookieStore = await cookies()
                     const res = await fetch(`${API_URL}/post`,{
@@ -119,8 +115,8 @@ export const blogServices={
                     return {data:data,error:null}
                     
         }catch(error){
-            return {data:null,error:{message:"somthing went wrong"}}
+            return {data:null,error:{message:"somthing went wrong"}};
         }
-    }
-}
+    },
+};
 
