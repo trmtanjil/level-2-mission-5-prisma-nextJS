@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import { error } from "console"
+import { cookies } from "next/headers"
 
 
 const API_URL=env.API_URL
@@ -12,6 +13,11 @@ interface ServiceOptions{
 interface BlogPostParams {
     isFeatured?:boolean,
     search?:""
+}
+interface blogData{
+    title:string,
+    content:string,
+    blog?:string[]
 }
 export interface BlogData {
   title: string;
@@ -26,8 +32,6 @@ export const blogServices={
     ){
         try{
              const url = new URL(`${API_URL}/post`)
-
-
             if(params){
                 Object.entries(params).forEach(([key,value])=>{
                     if(value !==undefined && value !==null && value !==""){
@@ -36,7 +40,6 @@ export const blogServices={
 
                 })
             }
-
             // url.searchParams.append("key", "value")
             // console.log("url",url.toString())
 
@@ -48,8 +51,6 @@ export const blogServices={
             if(options?.revalidate){
                 config.next = {revalidate:options.revalidate}
             }
-
-
 
             config.next ={...config.next, tags:["blogPost"]}
             const res =await fetch(url.toString(),config)
@@ -95,6 +96,22 @@ export const blogServices={
     }
 
 
+
+    createBlogPost :async(blogData:blogData)=>{
+        try{
+             const cookieStore = await cookies()
+                    const res = await fetch(`${API_URL}/post`,{
+                        method:"POST",
+                        headers:{
+                            "content-type":"application/json",
+                            cookie:cookieStore.toString()
+                        },
+                        body:JSON.stringify(blogData)
+                    })
+        }catch(err){
+            return {data:null,error:{message:"somthing went wrong"}}
+        }
+    }
 
 
 
