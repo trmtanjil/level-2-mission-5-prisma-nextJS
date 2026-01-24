@@ -24,7 +24,6 @@ getSession: async function () {
         data:null, error:{message:"session is missing"}
     }
   }
-  console.log("res clg",session)
   return {
     data:session, error:null
   }
