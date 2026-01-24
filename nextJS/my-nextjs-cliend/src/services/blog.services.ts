@@ -108,24 +108,19 @@ export const blogServices={
                         },
                         body:JSON.stringify(blogData)
                     })
-        }catch(err){
+                    const data = await res.json()
+
+                    if(data.error){
+                        return{
+                            data:null,
+                            error:{message:data.error || "Error post create faild"}
+                        }
+                    }
+                    return {data:data,error:null}
+                    
+        }catch(error){
             return {data:null,error:{message:"somthing went wrong"}}
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 }
 
