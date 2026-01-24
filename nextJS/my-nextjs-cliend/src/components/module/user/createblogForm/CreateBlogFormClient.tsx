@@ -1,3 +1,4 @@
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,16 +45,9 @@ export function CreageBlogFormClient(){
       console.log(blogData)
 
       try {
-        const res = await createBlogPost(blogData);
+      
 
-        console.log(res);
 
-        if (res.error) {
-          toast.error(res.error.message, { id: toastId });
-          return;
-        }
-
-        toast.success("Post Created", { id: toastId });
       }  catch (err) {
         toast.error("Something Went Wrong", { id: toastId });
       }
