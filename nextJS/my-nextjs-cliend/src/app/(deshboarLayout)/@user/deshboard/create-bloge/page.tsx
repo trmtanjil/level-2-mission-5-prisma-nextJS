@@ -4,7 +4,7 @@ import { BlogPost } from '@/types'
 import React from 'react'
 
 export default async function CreateBlog() {
-  const {data}= await blogServices.getBlogPosts({},{cache:"no-store"})
+  const {data}= await blogServices.getBlogPosts()
   console.log(data)
   return (
     <div>

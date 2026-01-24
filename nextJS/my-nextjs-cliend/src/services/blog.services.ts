@@ -13,6 +13,11 @@ interface BlogPostParams {
     isFeatured?:boolean,
     search?:""
 }
+export interface BlogData {
+  title: string;
+  content: string;
+  tag?: string[];
+}
 
 export const blogServices={
     getBlogPosts: async function(
@@ -88,4 +93,22 @@ export const blogServices={
             return {data:null, error:{message:"somthin went wrong for fetch"}}
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 }
+
