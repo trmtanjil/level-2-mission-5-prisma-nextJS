@@ -109,7 +109,7 @@ export const blogServices={
                     if(data.error){
                         return{
                             data:null,
-                            error:{message:data.error || "Error post create faild"}
+                            error:{message: "Error post create faild"}
                         }
                     }
                     return {data:data,error:null}

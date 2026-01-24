@@ -49,6 +49,11 @@ export function CreageBlogFormClient(){
       const res = await createBlogPost(blogData)
       console.log(res)
 
+      if(res.error){
+        toast.error(res.error.message, {id:toastId})
+      }
+      console.log(res)
+
 
       }  catch (err) {
         toast.error("Something Went Wrong", { id: toastId });
