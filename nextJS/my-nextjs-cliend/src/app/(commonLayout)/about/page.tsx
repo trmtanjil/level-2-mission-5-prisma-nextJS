@@ -15,12 +15,13 @@ export  default  function Aboutpage() {
   useEffect(()=>{
     (async ()=>{
       const {data,error} = await  getblogs()
-
+      
       setData(data)
       setError(error)
     })();
   },[])
-
+  
+  console.log(data)
   
   return (
     <div>this is Aboutpage</div>

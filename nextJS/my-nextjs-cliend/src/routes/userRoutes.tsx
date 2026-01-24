@@ -7,7 +7,7 @@ import { Route } from "@/types";
       items: [
         {
           title: "create blogs",
-          url: "/creatBlog",
+          url: "/deshboard/create-bloge",
         },
        
       ],
