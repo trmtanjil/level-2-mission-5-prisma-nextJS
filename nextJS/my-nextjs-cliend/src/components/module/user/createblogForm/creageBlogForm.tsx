@@ -4,6 +4,7 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { env } from '@/env'
+import { revalidateTag, updateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
  import React from 'react'
@@ -37,6 +38,10 @@ export default async function CreageBlogForm() {
         })
         console.log(res)
 
+        if(res?.ok){
+            revalidateTag("blogPost","max")
+            // updateTag("blogPost")
+        }
        if (res?.status) {
     redirect("/deshboard/create-bloge?success")
     }
