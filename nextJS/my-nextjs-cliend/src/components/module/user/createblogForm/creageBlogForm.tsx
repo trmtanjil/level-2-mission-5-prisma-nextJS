@@ -5,7 +5,9 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { env } from '@/env'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
  import React from 'react'
+import { toast } from 'sonner'
 
 
 const API_URL  = env.API_URL
@@ -35,6 +37,9 @@ export default async function CreageBlogForm() {
         })
         console.log(res)
 
+       if (res?.status) {
+    redirect("/deshboard/create-bloge?success")
+    }
     }
 
 
