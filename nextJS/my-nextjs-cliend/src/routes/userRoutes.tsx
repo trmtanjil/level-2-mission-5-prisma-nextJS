@@ -9,6 +9,10 @@ import { Route } from "@/types";
           title: "create blogs",
           url: "/deshboard/create-bloge",
         },
+         {
+          title: "deshboard",
+          url: "/deshboard",
+        },
        
       ],
     },
