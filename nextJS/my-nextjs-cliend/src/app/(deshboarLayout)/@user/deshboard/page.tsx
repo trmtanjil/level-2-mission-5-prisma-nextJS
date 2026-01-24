@@ -1,9 +1,9 @@
+import { redirect } from "next/navigation";
+
  
 export default async function userDaseboard() {
 
  
 
-  return (
-    <div>user Daseboard</div>
-  )
+  return redirect("/deshboard/create-bloge")
 }
