@@ -1,7 +1,10 @@
+import CreageBlogForm from '@/components/module/user/createblogForm/creageBlogForm'
 import React from 'react'
 
 export default function CreateBlog() {
   return (
-    <div>this is create blog page CreateBlog</div>
+    <div>
+      <CreageBlogForm></CreageBlogForm>
+    </div>
   )
 }
