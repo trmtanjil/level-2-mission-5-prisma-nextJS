@@ -13,7 +13,10 @@ import { Route } from "@/types";
           title: "deshboard",
           url: "/deshboard",
         },
-       
+            {
+          title: "History",
+          url: "/deshboard/history",
+        },
       ],
     },
  
