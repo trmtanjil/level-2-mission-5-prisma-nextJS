@@ -35,8 +35,7 @@ export default function PaginationControls({ meta }: PaginationControlsProps) {
   //* Showing 1 to 10 of 21 -> page 1
   //* Showing 11 to 20 of 21 -> page 2
 
-  const start = (currentPage - 1) * pageSize + 1;
-  const end = Math.min(currentPage * pageSize, total);
+ 
 
   return (
     <div className="flex items-center justify-between px-2 py-4 border-t mt-4">
