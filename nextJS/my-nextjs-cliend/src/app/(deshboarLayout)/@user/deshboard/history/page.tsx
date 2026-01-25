@@ -1,14 +1,16 @@
-import {  blogServices } from '@/services/blog.services'
-import { HistoryTable } from '../../history/historytable';
+import { HistoryTable } from '@/components/module/user/createblogForm/history/historytable';
+import { blogServices } from '@/services/blog.services';
  
 
-export default async function HistoryPage() {
+export default async function HistoryPage({searchParams}:{searchParams:Promise<{page:string}>}) {
 
-  const responst = await blogServices.getBlogPosts();
+  const {page}=await searchParams
+  console.log(page)
+
+  const responst = await blogServices.getBlogPosts({page});
   const posts = responst.data?.data ||[]
 
-  console.log("post",posts)
-
+ 
   return (
     <div>this is HistoryPage
    <HistoryTable posts={posts}></HistoryTable>

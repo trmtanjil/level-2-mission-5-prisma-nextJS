@@ -30,7 +30,7 @@ export function HistoryTable({posts}:{posts:BlogPost[]}) {
                <TableCell className="font-medium">{posts.title}</TableCell>
             <TableCell className="font-medium">{posts.tags}</TableCell>
             <TableCell>{posts.views}</TableCell>
-                        <TableCell>{posts.isFeatured}</TableCell>
+                        <TableCell>{posts?.isFeatured}</TableCell>
 
         
              

@@ -12,7 +12,8 @@ interface ServiceOptions{
 
 interface BlogPostParams {
     isFeatured?:boolean,
-    search?:""
+    search?:string,
+   page?:string
 }
  
 export interface BlogData {
