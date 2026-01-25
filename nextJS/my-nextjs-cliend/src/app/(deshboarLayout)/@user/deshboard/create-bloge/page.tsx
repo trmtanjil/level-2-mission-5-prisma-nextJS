@@ -5,7 +5,6 @@ import { blogServices } from '@/services/blog.services'
 
 export default async function CreateBlog() {
   const {data}= await blogServices.getBlogPosts()
-  console.log(data)
   return (
     <div className='mx-auto w-full flex justify-center'>
       {/* <CreageBlogForm></CreageBlogForm>\ */}
